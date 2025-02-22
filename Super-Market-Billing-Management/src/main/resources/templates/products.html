@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>SuperMarket Billing Software</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Guptha Supermarket</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/products}">Product Management</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+	<div class ="container">
+		<div class = "row">
+			<h1> List of Products </h1>
+		</div>
+		
+		<div class = "row">
+			<div class = "col-lg-3">
+				<a th:href = "@{/products/new}" class = "btn btn-primary btn-sm mb-3"> Add Product</a>
+			</div>
+		</div>
+		<table class = "table table-striped table-bordered">
+			<thead class = "table-dark">
+				<tr>
+					<th> Product Name</th>
+					<th> Product price</th>
+					<th> quantity </th>
+					<th> Total</th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each = "product: ${products}">
+					<td th:text = "${product.productName}"></td>
+					<td th:text = "${product.price}"></td>
+					<td th:text = "${product.quantity}"></td>
+					<td th:text = "${product.total}"></td>
+					<td>
+						<a th:href = "@{/products/edit/{id}(id=${product.id})}"
+						 class = "btn btn-primary">Update</a>
+						
+						<a th:href = "@{/products/{id}(id=${product.id})}"
+						 class = "btn btn-danger">Delete</a>
+						 
+					</td>
+				</tr>
+			</tbody>
+		
+		</table>
+		<br>
+		<br>
+		<h2>Total = <td th:text = "${msg}"></td>.00 Rs </h2>
+		<h3>                                           Thank You! Visit Again</h3>
+		
+	</div>
+</body>
+</html>
